@@ -1,11 +1,15 @@
 package com.kanj.apps.callercontact;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.provider.ContactsContract.Contacts.Data;
 
@@ -66,7 +70,7 @@ public class GetDataAndShowIntentService extends IntentService {
             c.moveToFirst();
             String name = c.getString(c.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
             String lookupKey = c.getString(c.getColumnIndex(ContactsContract.PhoneLookup.LOOKUP_KEY));
-            StringBuffer text = new StringBuffer();
+            StringBuilder text = new StringBuilder();
 
             Cursor details = contentResolver.query(
                     ContactsContract.Data.CONTENT_URI,
@@ -158,7 +162,21 @@ public class GetDataAndShowIntentService extends IntentService {
             i.putExtra(ShowDialogActivity.EXTRA_NAME, name);
             i.putExtra(ShowDialogActivity.EXTRA_TEXT, text.toString());
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
+
+            NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(android.R.drawable.ic_menu_call)
+                    .setContentTitle("Call from " + name)
+                    .setContentText(text.toString())
+                    .setContentIntent(PendingIntent.getActivity(
+                            this,
+                            0,
+                            i,
+                            PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT
+                            )
+                    );
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(0, nBuilder.build());
 
             /*try {
                 Thread.sleep(7000);

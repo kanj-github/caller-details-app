@@ -3,5 +3,22 @@
     <string name="number">"Number is %1$s"</string>
     <string name="title_dialog">Info</string>
     <string name="not_granted">"%1$s not granted\n"</string>
-    <string name="all_set">All set</string>
+    <string name="all_set">Settings</string>
+
+    <string-array name="setting_items">
+        <item>Email</item>
+        <item>Nickname</item>
+        <item>Note</item>
+        <item>Organization</item>
+        <item>Title</item>
+        <item>Relation</item>
+        <item>Address</item>
+        <item>Street</item>
+        <item>PO Box</item>
+        <item>Neighbourhood</item>
+        <item>City</item>
+        <item>Region</item>
+        <item>Postcode</item>
+        <item>Country</item>
+    </string-array>
 </resources>
