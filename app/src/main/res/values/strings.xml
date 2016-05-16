@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CallerContact</string>
+    <string name="app_name">Caller Details</string>
     <string name="number">"Number is %1$s"</string>
     <string name="title_dialog">Info</string>
     <string name="not_granted">"%1$s not granted\n"</string>
