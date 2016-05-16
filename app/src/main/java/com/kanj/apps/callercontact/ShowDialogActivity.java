@@ -1,5 +1,7 @@
 package com.kanj.apps.callercontact;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +25,10 @@ public class ShowDialogActivity extends AppCompatActivity {
         Intent i = getIntent();
         name = i.getStringExtra(EXTRA_NAME);
         text = i.getStringExtra(EXTRA_TEXT);
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancel(Constants.NOTIFICATION_ID);
     }
 
     @Override

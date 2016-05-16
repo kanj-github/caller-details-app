@@ -26,4 +26,6 @@ public class Constants {
 
     public static final int ADDRESS_FIELDS_ON = 0x7f00; // Always OR this
     public static final int ADDRESS_FIELDS_OFF = 0x80ff; // Always AND this
+
+    public static final int NOTIFICATION_ID = 132580;
 }
