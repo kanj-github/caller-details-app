@@ -8,7 +8,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ListView;
@@ -89,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 mask &= 0xfffffffe;
             }
 
-            Log.v("Kanj", "Saving " + Integer.toHexString(mask));
             SharedPreferences sPref = getSharedPreferences(Constants.SHARED_PREFERENCE_FILE, MODE_PRIVATE);
             SharedPreferences.Editor sPrefEditor = sPref.edit();
             sPrefEditor.putInt(Constants.MASK_SETTINGS_PREFERENCE_NAME, mask).apply();
@@ -99,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (permissions.length != grantResults.length) {
-            Log.v("Kanj", "weird bug");
             return;
         }
 

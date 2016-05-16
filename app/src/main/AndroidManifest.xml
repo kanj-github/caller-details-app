@@ -28,7 +28,7 @@
 
         <service
             android:name=".GetDataAndShowIntentService"
-            android:exported="false"></service>
+            android:exported="false"/>
 
         <activity
             android:name=".ShowDialogActivity"

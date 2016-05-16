@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.provider.ContactsContract.Contacts.Data;
 
 
@@ -89,50 +88,50 @@ public class GetDataAndShowIntentService extends IntentService {
                     if (ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_EMAIL) != 0) {
                         String email = details.getString(details.getColumnIndex(Data.DATA1));
-                        text.append("Email ID: ").append(email).append("\n");
+                        text.append(getString(R.string.field_email)).append(email).append("\n");
                     } else if (ContactsContract.CommonDataKinds.Nickname.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_NICKNAME) != 0) {
                         String nickname = details.getString(details.getColumnIndex(Data.DATA1));
-                        text.append("Nickname: ").append(nickname).append("\n");
+                        text.append(getString(R.string.field_nickname)).append(nickname).append("\n");
                     } else if (ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_NOTE) != 0) {
                         String note = details.getString(details.getColumnIndex(Data.DATA1));
-                        text.append("Note: ").append(note).append("\n");
+                        text.append(getString(R.string.field_note)).append(note).append("\n");
                     } else if (ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE.equals(mimeType)) {
                         if ((settings & Constants.MASK_ORG) != 0) {
                             String organization = details.getString(details.getColumnIndex(Data.DATA1));
-                            text.append("Organization: ").append(organization).append("\n");
+                            text.append(getString(R.string.field_org)).append(organization).append("\n");
                         }
 
                         if ((settings & Constants.MASK_TITLE) != 0) {
                             String title = details.getString(details.getColumnIndex(Data.DATA4));
                             if (title != null) {
-                                text.append("Title: ").append(title).append("\n");
+                                text.append(getString(R.string.field_title)).append(title).append("\n");
                             }
                         }
                     }  else if (ContactsContract.CommonDataKinds.Relation.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_RELATION) != 0) {
                         String relation = details.getString(details.getColumnIndex(Data.DATA1));
-                        text.append("Relation: ").append(relation).append("\n");
+                        text.append(getString(R.string.field_relation)).append(relation).append("\n");
                     }  else if (ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_ADDRESS) != 0) {
                         int type = details.getInt(details.getColumnIndex(Data.DATA2));
                         switch (type) {
                             case ContactsContract.CommonDataKinds.StructuredPostal.TYPE_HOME:
-                                text.append("Home address:\n");
+                                text.append(getString(R.string.field_name_home_address));
                                 break;
                             case ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK:
-                                text.append("Work address:\n");
+                                text.append(getString(R.string.field_name_work_address));
                                 break;
                             case ContactsContract.CommonDataKinds.StructuredPostal.TYPE_OTHER:
-                                text.append("Other address:\n");
+                                text.append(getString(R.string.field_name_other_address));
                                 break;
                             default:
                                 String label = details.getString(details.getColumnIndex(Data.DATA3));
                                 if (label != null) {
                                     text.append(label).append(":\n");
                                 } else {
-                                    text.append("Address:\n");
+                                    text.append(getString(R.string.field_name_address));
                                 }
                         }
                         String str = details.getString(details.getColumnIndex(Data.DATA1));
@@ -141,49 +140,49 @@ public class GetDataAndShowIntentService extends IntentService {
                         if ((settings & Constants.MASK_STREET) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA4));
                             if (str != null) {
-                                text.append("Street: ").append(str).append("\n");
+                                text.append(getString(R.string.field_street)).append(str).append("\n");
                             }
                         }
 
                         if ((settings & Constants.MASK_PO_BOX) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA5));
                             if (str != null) {
-                                text.append("PO Box: ").append(str).append("\n");
+                                text.append(getString(R.string.field_po_box)).append(str).append("\n");
                             }
                         }
 
                         if ((settings & Constants.MASK_HOOD) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA6));
                             if (str != null) {
-                                text.append("Neighbourhood: ").append(str).append("\n");
+                                text.append(getString(R.string.field_hood)).append(str).append("\n");
                             }
                         }
 
                         if ((settings & Constants.MASK_CITY) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA7));
                             if (str != null) {
-                                text.append("City: ").append(str).append("\n");
+                                text.append(getString(R.string.field_city)).append(str).append("\n");
                             }
                         }
 
                         if ((settings & Constants.MASK_REGION) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA8));
                             if (str != null) {
-                                text.append("Region: ").append(str).append("\n");
+                                text.append(getString(R.string.field_region)).append(str).append("\n");
                             }
                         }
 
                         if ((settings & Constants.MASK_POSTCODE) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA9));
                             if (str != null) {
-                                text.append("Postcode: ").append(str).append("\n");
+                                text.append(getString(R.string.field_postcode)).append(str).append("\n");
                             }
                         }
 
                         if ((settings & Constants.MASK_COUNTRY) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA10));
                             if (str != null) {
-                                text.append("Country: ").append(str).append("\n");
+                                text.append(getString(R.string.field_country)).append(str).append("\n");
                             }
                         }
                     }
@@ -196,7 +195,7 @@ public class GetDataAndShowIntentService extends IntentService {
 
                 NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_contact_phone_black_24dp)
-                        .setContentTitle("Call from " + name)
+                        .setContentTitle(getString(R.string.noti_title, name))
                         .setContentText(text.toString())
                         .setContentIntent(PendingIntent.getActivity(
                                 this,
