@@ -68,7 +68,7 @@ public class GetDataAndShowIntentService extends IntentService {
         Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
         ContentResolver contentResolver = getContentResolver();
         Cursor c = contentResolver.query(uri, PROJECTION, null, null, null);
-        if (c != null) {
+        if (c != null && c.getCount() > 0) {
             c.moveToFirst();
             String name = c.getString(c.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
             String lookupKey = c.getString(c.getColumnIndex(ContactsContract.PhoneLookup.LOOKUP_KEY));
