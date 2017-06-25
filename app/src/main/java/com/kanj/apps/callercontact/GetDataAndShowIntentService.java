@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.app.NotificationCompat;
 import android.provider.ContactsContract.Contacts.Data;
+import android.text.TextUtils;
 
 
 /**
@@ -88,31 +89,31 @@ public class GetDataAndShowIntentService extends IntentService {
                     if (ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_EMAIL) != 0) {
                         String email = details.getString(details.getColumnIndex(Data.DATA1));
-                        text.append(getString(R.string.field_email)).append(email).append("\n");
+                        appendDetail(text, getString(R.string.field_email), email);
                     } else if (ContactsContract.CommonDataKinds.Nickname.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_NICKNAME) != 0) {
                         String nickname = details.getString(details.getColumnIndex(Data.DATA1));
-                        text.append(getString(R.string.field_nickname)).append(nickname).append("\n");
+                        appendDetail(text, getString(R.string.field_nickname), nickname);
                     } else if (ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_NOTE) != 0) {
                         String note = details.getString(details.getColumnIndex(Data.DATA1));
-                        text.append(getString(R.string.field_note)).append(note).append("\n");
+                        appendDetail(text, getString(R.string.field_note), note);
                     } else if (ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE.equals(mimeType)) {
                         if ((settings & Constants.MASK_ORG) != 0) {
                             String organization = details.getString(details.getColumnIndex(Data.DATA1));
-                            text.append(getString(R.string.field_org)).append(organization).append("\n");
+                            appendDetail(text, getString(R.string.field_org), organization);
                         }
 
                         if ((settings & Constants.MASK_TITLE) != 0) {
                             String title = details.getString(details.getColumnIndex(Data.DATA4));
                             if (title != null) {
-                                text.append(getString(R.string.field_title)).append(title).append("\n");
+                                appendDetail(text, getString(R.string.field_title), title);
                             }
                         }
                     }  else if (ContactsContract.CommonDataKinds.Relation.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_RELATION) != 0) {
                         String relation = details.getString(details.getColumnIndex(Data.DATA1));
-                        text.append(getString(R.string.field_relation)).append(relation).append("\n");
+                        appendDetail(text, getString(R.string.field_relation), relation);
                     }  else if (ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE.equals(mimeType)
                             && (settings & Constants.MASK_ADDRESS) != 0) {
                         int type = details.getInt(details.getColumnIndex(Data.DATA2));
@@ -140,49 +141,49 @@ public class GetDataAndShowIntentService extends IntentService {
                         if ((settings & Constants.MASK_STREET) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA4));
                             if (str != null) {
-                                text.append(getString(R.string.field_street)).append(str).append("\n");
+                                appendDetail(text, getString(R.string.field_street), str);
                             }
                         }
 
                         if ((settings & Constants.MASK_PO_BOX) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA5));
                             if (str != null) {
-                                text.append(getString(R.string.field_po_box)).append(str).append("\n");
+                                appendDetail(text, getString(R.string.field_po_box), str);
                             }
                         }
 
                         if ((settings & Constants.MASK_HOOD) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA6));
                             if (str != null) {
-                                text.append(getString(R.string.field_hood)).append(str).append("\n");
+                                appendDetail(text, getString(R.string.field_hood), str);
                             }
                         }
 
                         if ((settings & Constants.MASK_CITY) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA7));
                             if (str != null) {
-                                text.append(getString(R.string.field_city)).append(str).append("\n");
+                                appendDetail(text, getString(R.string.field_city), str);
                             }
                         }
 
                         if ((settings & Constants.MASK_REGION) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA8));
                             if (str != null) {
-                                text.append(getString(R.string.field_region)).append(str).append("\n");
+                                appendDetail(text, getString(R.string.field_region), str);
                             }
                         }
 
                         if ((settings & Constants.MASK_POSTCODE) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA9));
                             if (str != null) {
-                                text.append(getString(R.string.field_postcode)).append(str).append("\n");
+                                appendDetail(text, getString(R.string.field_postcode), str);
                             }
                         }
 
                         if ((settings & Constants.MASK_COUNTRY) != 0) {
                             str = details.getString(details.getColumnIndex(Data.DATA10));
                             if (str != null) {
-                                text.append(getString(R.string.field_country)).append(str).append("\n");
+                                appendDetail(text, getString(R.string.field_country), str);
                             }
                         }
                     }
@@ -210,13 +211,14 @@ public class GetDataAndShowIntentService extends IntentService {
             }
             c.close();
 
-            /*try {
-                Thread.sleep(7000);
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-            }*/
-
             IncomingCallReceiver.completeWakefulIntent(i);
+        }
+    }
+
+    private void appendDetail(StringBuilder stringBuilder, String detailField,
+                                       String detailValue) {
+        if (!TextUtils.isEmpty(detailValue)) {
+            stringBuilder.append(detailField).append(detailValue).append("\n");
         }
     }
 }
