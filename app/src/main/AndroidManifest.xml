@@ -26,10 +26,6 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".GetDataAndShowIntentService"
-            android:exported="false"/>
-
         <activity
             android:name=".ShowDialogActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"

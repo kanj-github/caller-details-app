@@ -40,4 +40,6 @@
         <item>Postcode</item>
         <item>Country</item>
     </string-array>
+
+    <string name="no_details_found">[ No Details Found ]</string>
 </resources>
