@@ -1,10 +1,8 @@
 package com.kanj.apps.callercontact;
 
-import android.content.SharedPreferences;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.util.Log;
 import android.widget.ListView;
 
 import org.junit.Before;
@@ -37,7 +35,6 @@ public class SettingsTest {
 
     @Before
     public void getSwitchCount() {
-        Log.v("Kanj", "Running the before crap");
         numberOfSwitches = ((ListView) mActivityRule.getActivity().findViewById(R.id.list))
                 .getAdapter().getCount();
     }
