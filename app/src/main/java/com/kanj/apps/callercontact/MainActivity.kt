@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        val permissions = arrayOf(Manifest.permission.READ_PHONE_STATE,
+        val PERMISSIONS = arrayOf(Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.WAKE_LOCK,
             Manifest.permission.READ_CONTACTS)
     }
@@ -29,14 +29,14 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         var check = true
-        permissions.forEach {
+        PERMISSIONS.forEach {
             if (ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED) {
                 check = false
             }
         }
 
         if (!check && requestPermission) {
-            ActivityCompat.requestPermissions(this, permissions, 100)
+            ActivityCompat.requestPermissions(this, PERMISSIONS, 100)
             requestPermission = false
         } else {
             text.setText(R.string.all_set)
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 }
             })
 
-            enable_switch.isChecked = (maskSettings.and(1)) == 1
+            enable_switch.isChecked = (maskSettings and 1) == 1
             mAdapter = SettingsListAdapter(this, resources.getStringArray(R.array.setting_items), maskSettings)
             list.adapter = mAdapter
         }
